@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-app
+  namespace: demo
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: employee-app
+
+  template:
+    metadata:
+      labels:
+        app: employee-app
+
+    spec:
+      containers:
+      - name: employee-app
+        image: <your-dockerhub-username>/employee-app:v1
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 5000
+
+        env:
+        - name: APP_VERSION
+          value: "1.0"
